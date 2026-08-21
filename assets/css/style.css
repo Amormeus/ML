@@ -1,0 +1,36 @@
+:root{
+  --bg:#0f0f12;
+  --accent:#ff6b6b;
+  --text:#f5f5f7;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Arial}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:linear-gradient(90deg,rgba(255,255,255,0.02),transparent)}
+.topbar h1{margin:0;font-size:18px}
+main{padding:20px}
+.swiper{width:100%;height:70vh;border-radius:12px;overflow:hidden;background:#111;position:relative}
+.swiper-slide{display:flex;align-items:center;justify-content:center;background:#000}
+.slide-img{width:100%;height:100%;object-fit:cover;display:block;}
+
+/* Ken Burns */
+.kb-zoom{transform-origin:center center;transition:transform 12s ease;}
+
+/* Glitch overlay */
+.glitch{
+  position:relative;
+}
+.glitch::before,.glitch::after{
+  content:"";position:absolute;inset:0;background:inherit;mix-blend-mode:screen;opacity:0.6;pointer-events:none;
+  transform-origin:center;
+}
+.glitch::before{filter:blur(2px) hue-rotate(-10deg);transform:translateX(-6px) skewX(-2deg)}
+.glitch::after{filter:blur(1px) hue-rotate(20deg);transform:translateX(6px) skewX(2deg)}
+
+/* Mosaic reveal grid */
+.mosaic-grid{display:grid;grid-template-columns:repeat(8,1fr);grid-auto-rows:1fr;height:100%}
+.mosaic-cell{background-size:cover;background-position:center;opacity:0;transform:scale(0.9);transition:opacity .6s ease,transform .6s ease}
+
+/* Responsive */
+@media (max-width:800px){
+  .swiper{height:55vh}
+}
