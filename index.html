@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ML</title>
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#7dd3fc;
+      --gap:12px;
+    }
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#071022 0%, #0f1724 100%);font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;color:#e6eef8}
+    .wrap{max-width:1200px;margin:28px auto;padding:18px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+    h1{font-size:20px;margin:0;color:var(--accent)}
+    .controls{display:flex;gap:8px;align-items:center}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:8px;color:inherit;cursor:pointer}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:var(--gap)}
+    .card{position:relative;overflow:hidden;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 6px 18px rgba(2,6,23,0.6);min-height:120px;display:flex;align-items:center;justify-content:center}
+    .card img{width:100%;height:100%;object-fit:cover;display:block;transform-origin:center center;transition:transform .6s ease, filter .6s ease}
+    .overlay{position:absolute;inset:0;pointer-events:none}
+    .caption{position:absolute;left:10px;bottom:10px;background:rgba(0,0,0,0.35);padding:6px 8px;border-radius:8px;font-size:12px}
+    /* Lightbox */
+    .lightbox{position:fixed;inset:0;background:rgba(2,6,23,0.85);display:none;align-items:center;justify-content:center;z-index:60}
+    .lightbox.open{display:flex}
+    .lightbox img{max-width:92%;max-height:92%;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,0.7)}
+    /* Slideshow controls */
+    .slideshow-controls{display:flex;gap:8px;align-items:center}
+    /* Animation classes and keyframes */
+    /* Basic transforms */
+    .anim-zoom-in{animation:zoomIn var(--dur) var(--ease) both}
+    .anim-zoom-out{animation:zoomOut var(--dur) var(--ease) both}
+    .anim-fade{animation:fade var(--dur) var(--ease) both}
+    .anim-slide-up{animation:slideUp var(--dur) var(--ease) both}
+    .anim-slide-down{animation:slideDown var(--dur) var(--ease) both}
+    .anim-slide-left{animation:slideLeft var(--dur) var(--ease) both}
+    .anim-slide-right{animation:slideRight var(--dur) var(--ease) both}
+    .anim-flip-x{animation:flipX var(--dur) var(--ease) both}
+    .anim-flip-y{animation:flipY var(--dur) var(--ease) both}
+    .anim-rotate{animation:rotateIn var(--dur) var(--ease) both}
+    .anim-mirror{animation:mirror var(--dur) var(--ease) both}
+    .anim-blur{animation:blurIn var(--dur) var(--ease) both}
+    .anim-glitch{animation:glitch var(--dur) steps(2) both}
+    .anim-break{animation:breakApart var(--dur) var(--ease) both}
+    /* Keyframes */
+    @keyframes zoomIn{0%{transform:scale(0.6);opacity:0}100%{transform:scale(1);opacity:1}}
+    @keyframes zoomOut{0%{transform:scale(1.4);opacity:0}100%{transform:scale(1);opacity:1}}
+    @keyframes fade{0%{opacity:0}100%{opacity:1}}
+    @keyframes slideUp{0%{transform:translateY(30%);opacity:0}100%{transform:translateY(0);opacity:1}}
+    @keyframes slideDown{0%{transform:translateY(-30%);opacity:0}100%{transform:translateY(0);opacity:1}}
+    @keyframes slideLeft{0%{transform:translateX(30%);opacity:0}100%{transform:translateX(0);opacity:1}}
+    @keyframes slideRight{0%{transform:translateX(-30%);opacity:0}100%{transform:translateX(0);opacity:1}}
+    @keyframes flipX{0%{transform:rotateX(90deg);opacity:0}100%{transform:rotateX(0);opacity:1}}
+    @keyframes flipY{0%{transform:rotateY(90deg);opacity:0}100%{transform:rotateY(0);opacity:1}}
+    @keyframes rotateIn{0%{transform:rotate(-45deg) scale(.8);opacity:0}100%{transform:rotate(0) scale(1);opacity:1}}
+    @keyframes mirror{0%{transform:scaleX(-1) translateY(10%);opacity:0}100%{transform:scaleX(1) translateY(0);opacity:1}}
+    @keyframes blurIn{0%{filter:blur(8px);opacity:0}100%{filter:blur(0);opacity:1}}
+    @keyframes glitch{
+      0%{transform:translateX(0);clip-path:inset(0 0 0 0)}
+      20%{transform:translateX(-6px);clip-path:inset(10% 0 60% 0)}
+      40%{transform:translateX(6px);clip-path:inset(40% 0 10% 0)}
+      60%{transform:translateX(-4px);clip-path:inset(20% 0 30% 0)}
+      80%{transform:translateX(4px);clip-path:inset(30% 0 20% 0)}
+      100%{transform:translateX(0);clip-path:inset(0 0 0 0)}
+    }
+    @keyframes breakApart{
+      0%{transform:translateY(0) scale(1);opacity:1;filter:none}
+      40%{transform:translateY(-8px) rotate(-2deg) scale(.98);opacity:.9;filter:grayscale(.2)}
+      70%{transform:translateY(12px) rotate(3deg) scale(.96);opacity:.85;filter:sepia(.1)}
+      100%{transform:translateY(0) scale(1);opacity:1;filter:none}
+    }
+    /* subtle hover */
+    .card:hover img{transform:scale(1.03)}
+    /* small responsive tweaks */
+    @media (max-width:520px){
+      .grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Random Animated Photo Album</h1>
+      <div class="controls">
+        <div class="slideshow-controls">
+          <button id="shuffleBtn" class="btn">Shuffle Now</button>
+          <button id="toggleSlideshow" class="btn">Start Slideshow</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div id="grid" class="grid" aria-live="polite"></div>
+    </main>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-hidden="true">
+    <img id="lightboxImg" alt="Expanded photo" />
+  </div>
+
+  <script>
+    /* ====== Configuration ====== */
+    const images = [
+      // Put your image paths here relative to index.html or use remote URLs
+      "https://drive.google.com/file/d/128kxTggnpv4Ag2Bt_GRWLGAcW8iH4-ag/view?usp=drive_link",
+      "https://drive.google.com/file/d/1zcBlu8SeIOcaNrDx8iOY5boPrJKWrdAN/view?usp=drive_link",
+      "https://drive.google.com/file/d/168IkAwgHf6KpSPsL_VQBUOOMlv6fEMlU/view?usp=drive_link",
+      "https://drive.google.com/file/d/14TxB8bNVumR2MC_6IB-VNdlAvup0GZxz/view?usp=drive_link",
+      "https://drive.google.com/file/d/1Bgkw1pnf_CYKc6sm88vxxppf7V0ZeGG1/view?usp=drive_link",
+      "https://drive.google.com/file/d/1k4llWRWKP-0_0egpo-clmddJO06RlHvu/view?usp=drive_link",
+      "https://drive.google.com/file/d/1Gy6k8X2dOIqBlZJpKALKAcTDuGv9Fvo0/view?usp=drive_link",
+      "https://drive.google.com/file/d/1aoaiv2qQjL9yD8s9XOTHLb61VgTqsfEe/view?usp=drive_link",
+      "https://drive.google.com/file/d/1O280dKtX0RRQq3i6tOwxaBYAebgjCLWY/view?usp=drive_link",
+      "https://drive.google.com/file/d/1ua-X9mVsRwLc0AVoMx06dHqX48hebx5N/view?usp=drive_link",
+      "https://drive.google.com/file/d/1ZUblmo0nqtQ3Z8tFy6K0Ngmj8BZhAK3k/view?usp=drive_link",
+      "https://drive.google.com/file/d/1I8W4xGQK1GPsiy5acoL4Kw52dXknNEqs/view?usp=drive_link",
+      "https://drive.google.com/file/d/1OOimdrWDQp6DgiPsouzsRhFzORlBqjKf/view?usp=drive_link",
+      "https://drive.google.com/file/d/13Jbw5z256Zgc14a98plnlIpbwU7R0s9C/view?usp=drive_link",
+      "https://drive.google.com/file/d/14AqO4j2lwAvS1Vh673fl_TSMqjlLuhK_/view?usp=drive_link",
+      
+      
+      
+    ];
+
+    const animationClasses = [
+      "anim-zoom-in","anim-zoom-out","anim-fade","anim-slide-up","anim-slide-down",
+      "anim-slide-left","anim-slide-right","anim-flip-x","anim-flip-y","anim-rotate",
+      "anim-mirror","anim-blur","anim-glitch","anim-break"
+    ];
+
+    /* ====== Helpers ====== */
+    function rand(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+    function randFloat(min,max){ return (Math.random()*(max-min)+min).toFixed(2); }
+
+    /* ====== Build grid with randomized animations per load ====== */
+    const grid = document.getElementById("grid");
+    function buildGrid(){
+      grid.innerHTML = "";
+      // Shuffle images array copy so order is random each load
+      const imgs = images.slice().sort(()=>Math.random()-0.5);
+      imgs.forEach((src, idx) => {
+        const card = document.createElement("div");
+        card.className = "card";
+        // Random animation class and properties
+        const anim = rand(animationClasses);
+        const dur = (parseFloat(randFloat(0.9,2.6))).toString()+"s";
+        const ease = rand(["ease","ease-in","ease-out","cubic-bezier(.2,.9,.2,1)","linear"]);
+        // set CSS variables on element
+        card.style.setProperty("--dur", dur);
+        card.style.setProperty("--ease", ease);
+        // Slight random delay so items don't animate all at once
+        const delay = randFloat(0,1.2) + "s";
+        card.style.animationDelay = delay;
+        // Create image
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = "Photo " + (idx+1);
+        // Apply animation class to image element
+        img.classList.add(anim);
+        img.style.animationDelay = delay;
+        img.style.setProperty("--dur", dur);
+        img.style.setProperty("--ease", ease);
+        // caption
+        const caption = document.createElement("div");
+        caption.className = "caption";
+        caption.textContent = `Photo ${idx+1}`;
+        // click to open lightbox
+        card.addEventListener("click", ()=>openLightbox(src));
+        card.appendChild(img);
+        card.appendChild(caption);
+        grid.appendChild(card);
+      });
+    }
+
+    /* ====== Lightbox ====== */
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    function openLightbox(src){
+      lightboxImg.src = src;
+      lightbox.classList.add("open");
+      lightbox.setAttribute("aria-hidden","false");
+    }
+    lightbox.addEventListener("click", ()=>{
+      lightbox.classList.remove("open");
+      lightbox.setAttribute("aria-hidden","true");
+      lightboxImg.src = "";
+    });
+
+    /* ====== Slideshow ====== */
+    let slideshowInterval = null;
+    const toggleSlideshowBtn = document.getElementById("toggleSlideshow");
+    function startSlideshow(){
+      if(slideshowInterval) return;
+      slideshowInterval = setInterval(()=>{
+        // pick a random card and animate it with a new random animation
+        const cards = Array.from(document.querySelectorAll(".card img"));
+        if(cards.length===0) return;
+        const target = rand(cards);
+        // remove existing animation classes
+        animationClasses.forEach(c=>target.classList.remove(c));
+        const newAnim = rand(animationClasses);
+        const dur = (parseFloat(randFloat(0.9,2.6))).toString()+"s";
+        const ease = rand(["ease","ease-in","ease-out","cubic-bezier(.2,.9,.2,1)","linear"]);
+        const delay = "0s";
+        target.style.setProperty("--dur", dur);
+        target.style.setProperty("--ease", ease);
+        target.style.animationDelay = delay;
+        target.classList.add(newAnim);
+      }, 1600);
+      toggleSlideshowBtn.textContent = "Stop Slideshow";
+    }
+    function stopSlideshow(){
+      clearInterval(slideshowInterval);
+      slideshowInterval = null;
+      toggleSlideshowBtn.textContent = "Start Slideshow";
+    }
+    toggleSlideshowBtn.addEventListener("click", ()=>{
+      if(slideshowInterval) stopSlideshow(); else startSlideshow();
+    });
+
+    /* ====== Shuffle button ====== */
+    document.getElementById("shuffleBtn").addEventListener("click", ()=>{
+      buildGrid();
+    });
+
+    /* ====== Initialize on load ====== */
+    document.addEventListener("DOMContentLoaded", ()=>{
+      buildGrid();
+      // Optionally start slideshow automatically sometimes
+      if(Math.random() < 0.35) startSlideshow();
+    });
+
+    /* ====== Accessibility: keyboard close lightbox ====== */
+    document.addEventListener("keydown", (e)=>{
+      if(e.key === "Escape" && lightbox.classList.contains("open")){
+        lightbox.classList.remove("open");
+        lightboxImg.src = "";
+      }
+    });
+  </script>
+</body>
+</html>
