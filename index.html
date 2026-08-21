@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#050505" />
+  <title>My Photo Gallery</title>
+  <link rel="preload" as="script" href="app.js" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main id="app" class="app">
+    <div id="ambient" class="ambient" aria-hidden="true"></div>
+    <div id="progress" class="progress"><span></span></div>
+
+    <section class="stage" aria-label="Trình chiếu ảnh">
+      <div id="slideA" class="slide slide-a"></div>
+      <div id="slideB" class="slide slide-b"></div>
+      <div class="vignette" aria-hidden="true"></div>
+      <div class="grain" aria-hidden="true"></div>
+
+      <div class="topbar">
+        <div class="brand">
+          <span class="dot"></span>
+          <span id="titleText">MY GALLERY</span>
+        </div>
+        <div class="counter" id="counter">01 / 00</div>
+      </div>
+
+      <div class="center-ui">
+        <button id="playPause" class="icon-btn" aria-label="Phát hoặc dừng">
+          <span class="play-icon">▶</span>
+        </button>
+        <div class="hint">RANDOM PHOTO · RANDOM EFFECT</div>
+      </div>
+
+      <div class="bottom-ui">
+        <div class="caption">
+          <div id="captionMain">Your collection</div>
+          <div id="captionSub">Auto slideshow</div>
+        </div>
+        <div class="controls">
+          <button class="control-btn" id="prevBtn" aria-label="Ảnh trước">←</button>
+          <button class="control-btn" id="nextBtn" aria-label="Ảnh tiếp theo">→</button>
+          <button class="control-btn" id="shuffleBtn" aria-label="Đổi ảnh ngẫu nhiên">⤨</button>
+          <button class="control-btn" id="fullscreenBtn" aria-label="Toàn màn hình">⛶</button>
+        </div>
+      </div>
+    </section>
+
+    <aside class="panel" id="panel">
+      <div class="panel-head">
+        <div>
+          <div class="panel-kicker">SLIDESHOW ENGINE</div>
+          <h1>Photo Collection</h1>
+        </div>
+        <button id="closePanel" class="close-btn" aria-label="Đóng">×</button>
+      </div>
+
+      <div class="setting">
+        <label for="interval">Thời gian mỗi ảnh <strong><span id="intervalValue">5</span>s</strong></label>
+        <input id="interval" type="range" min="2" max="15" step="1" value="5" />
+      </div>
+
+      <div class="setting toggle-row">
+        <div>
+          <div class="label">Random ảnh</div>
+          <div class="sub">Không lặp lại ảnh vừa xem</div>
+        </div>
+        <button class="switch on" id="randomToggle" aria-pressed="true"><span></span></button>
+      </div>
+
+      <div class="setting toggle-row">
+        <div>
+          <div class="label">Random hiệu ứng</div>
+          <div class="sub">Chọn ngẫu nhiên từ nhiều transition</div>
+        </div>
+        <button class="switch on" id="effectToggle" aria-pressed="true"><span></span></button>
+      </div>
+
+      <div class="setting">
+        <div class="label effects-title">Hiệu ứng</div>
+        <div class="effect-pills" id="effectPills"></div>
+      </div>
+
+      <div class="setting drive-setting">
+        <div class="label">Google Drive</div>
+        <div class="sub drive-help">Đặt thư mục ở chế độ <b>Anyone with the link → Viewer</b>.</div>
+        <input id="driveFolder" class="text-input" type="text" placeholder="Dán link hoặc Folder ID Google Drive" />
+        <input id="driveApiKey" class="text-input" type="password" placeholder="Google Drive API Key" />
+        <button id="loadDriveBtn" class="upload-btn drive-btn">↻ Tải ảnh từ Google Drive</button>
+        <div id="driveStatus" class="drive-status">Chưa kết nối Google Drive</div>
+      </div>
+
+      <div class="setting">
+        <div class="label">Ảnh</div>
+        <div class="dropzone" id="dropzone">
+          <input id="fileInput" type="file" accept="image/*" multiple hidden />
+          <button id="addFilesBtn" class="upload-btn">+ Thêm ảnh từ máy</button>
+          <div class="drop-text">Kéo & thả ảnh vào đây</div>
+        </div>
+      </div>
+
+      <div class="thumbs" id="thumbs"></div>
+
+      <div class="panel-foot">GitHub Pages compatible · Google Drive API + HTML / CSS / JS</div>
+    </aside>
+
+    <button id="openPanel" class="settings-fab" aria-label="Mở cài đặt">⚙</button>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
