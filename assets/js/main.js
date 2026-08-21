@@ -1,10 +1,21 @@
 // assets/js/main.js
 const IMAGES = [
-  'assets/images/photo1.jpg',
-  'assets/images/photo2.jpg',
-  'assets/images/photo3.jpg',
-  'assets/images/photo4.jpg',
-  'assets/images/photo5.jpg'
+'https://drive.google.com/file/d/14AqO4j2lwAvS1Vh673fl_TSMqjlLuhK_/view?usp=drive_link', 
+ 'https://drive.google.com/file/d/13Jbw5z256Zgc14a98plnlIpbwU7R0s9C/view?usp=drive_link', 
+'https://drive.google.com/file/d/1OOimdrWDQp6DgiPsouzsRhFzORlBqjKf/view?usp=drive_link', 
+'https://drive.google.com/file/d/1I8W4xGQK1GPsiy5acoL4Kw52dXknNEqs/view?usp=drive_link', 
+'https://drive.google.com/file/d/1ZUblmo0nqtQ3Z8tFy6K0Ngmj8BZhAK3k/view?usp=drive_link', 
+'https://drive.google.com/file/d/1ua-X9mVsRwLc0AVoMx06dHqX48hebx5N/view?usp=drive_link', 
+'https://drive.google.com/file/d/1O280dKtX0RRQq3i6tOwxaBYAebgjCLWY/view?usp=drive_link', 
+'https://drive.google.com/file/d/1aoaiv2qQjL9yD8s9XOTHLb61VgTqsfEe/view?usp=drive_link', 
+'https://drive.google.com/file/d/1Gy6k8X2dOIqBlZJpKALKAcTDuGv9Fvo0/view?usp=drive_link', 
+'https://drive.google.com/file/d/1k4llWRWKP-0_0egpo-clmddJO06RlHvu/view?usp=drive_link', 
+'https://drive.google.com/file/d/1Bgkw1pnf_CYKc6sm88vxxppf7V0ZeGG1/view?usp=drive_link', 
+'https://drive.google.com/file/d/14TxB8bNVumR2MC_6IB-VNdlAvup0GZxz/view?usp=drive_link', 
+'https://drive.google.com/file/d/168IkAwgHf6KpSPsL_VQBUOOMlv6fEMlU/view?usp=drive_link', 
+'https://drive.google.com/file/d/1zcBlu8SeIOcaNrDx8iOY5boPrJKWrdAN/view?usp=drive_link', 
+'https://drive.google.com/file/d/128kxTggnpv4Ag2Bt_GRWLGAcW8iH4-ag/view?usp=drive_link',
+
 ];
 
 // Utility: preload
