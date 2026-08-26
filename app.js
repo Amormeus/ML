@@ -347,6 +347,18 @@ document.addEventListener('visibilitychange', () => {
   else if (running) { startProgress(); scheduleNext(); }
 });
 
-showCurrent();
-preload();
-scheduleNext();
+// Auto-load Google Drive images on startup if credentials are available
+async function autoLoadOnStartup() {
+  if (DEFAULT_DRIVE_FOLDER && DEFAULT_DRIVE_FOLDER !== 'YOUR_GOOGLE_DRIVE_FOLDER_LINK_OR_ID_HERE' && 
+      DEFAULT_DRIVE_API_KEY && DEFAULT_DRIVE_API_KEY !== 'YOUR_GOOGLE_DRIVE_API_KEY_HERE') {
+    els.driveFolder.value = DEFAULT_DRIVE_FOLDER;
+    els.driveApiKey.value = DEFAULT_DRIVE_API_KEY;
+    await loadGoogleDriveImages();
+  } else {
+    showCurrent();
+    preload();
+    scheduleNext();
+  }
+}
+
+autoLoadOnStartup();
