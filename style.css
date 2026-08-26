@@ -15,7 +15,7 @@ button { color: inherit; }
 
 .app { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; }
 .stage { position: absolute; inset: 0; overflow: hidden; }
-.slide { position: absolute; inset: -4%; background-position: center; background-size: cover; background-repeat: no-repeat; will-change: transform, opacity, filter, clip-path; }
+.slide { position: absolute; inset: 0; background-position: center center; background-size: auto auto; background-repeat: no-repeat; will-change: transform, opacity, filter, clip-path; }
 .slide-a { z-index: 2; opacity: 1; }
 .slide-b { z-index: 1; opacity: 0; }
 .slide.active { opacity: 1; }
@@ -73,6 +73,18 @@ input[type="range"] { width: 100%; margin-top: 15px; accent-color: #fff; }
 .thumb { aspect-ratio: 1; background-position: center; background-size: cover; border-radius: 8px; border: 1px solid transparent; cursor: pointer; opacity: .65; }
 .thumb:hover, .thumb.current { opacity: 1; border-color: #fff; }
 .panel-foot { margin-top: 24px; color: rgba(255,255,255,.35); font-size: 10px; letter-spacing: .08em; }
+
+/* ---------- IMAGE DISPLAY: NATIVE SIZE ---------- */
+/*
+   Images are displayed at their natural/native CSS pixel size.
+   They are NOT stretched or forced to fit the screen.
+   Large images may extend beyond the viewport and be cropped by .stage.
+   The image remains centered in the slideshow area.
+*/
+.slide {
+  background-size: auto auto;
+  background-position: center center;
+}
 
 /* ---------- TRANSITIONS ---------- */
 .fx-fade-in { animation: fadeIn .9s cubic-bezier(.2,.7,.2,1) both; }
