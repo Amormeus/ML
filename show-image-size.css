@@ -1,0 +1,28 @@
+/* Image size badge */
+.img-size-badge {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  padding: 6px 8px;
+  background: rgba(0,0,0,.6);
+  color: #fff;
+  font-size: 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.5);
+  pointer-events: none;
+  z-index: 50;
+  backdrop-filter: blur(6px);
+  white-space: nowrap;
+  transform-origin: 100% 100%;
+  transition: opacity .15s ease, transform .15s ease;
+  opacity: 0.95;
+}
+
+/* If you want the badge only visible on hover of the image container */
+.img-wrap { position: relative; display: inline-block; }
+.img-wrap .img-size-badge { opacity: 0; transform: translateY(6px) scale(.98); }
+.img-wrap:hover .img-size-badge,
+.img-wrap:focus-within .img-size-badge { opacity: 1; transform: translateY(0) scale(1); }
+
+/* Small variant for thumbnails */
+.img-size-badge.small { font-size: 10px; padding: 4px 6px; border-radius: 6px; }
