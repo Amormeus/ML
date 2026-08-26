@@ -35,7 +35,8 @@ const EFFECTS = [
   ['rotate','Rotate'], ['blur','Blur'], ['slice','Slice'], ['circle','Circle'],
   ['diamond','Diamond'], ['tilt','Tilt'], ['dissolve','Dissolve'], ['swing','Swing']
 ];
-
+const DEFAULT_DRIVE_FOLDER = 'https://drive.google.com/drive/folders/1w4xkZGmNIzNy__Tpj6Wf321jE-RPfQmS?usp=drive_link';
+const DEFAULT_DRIVE_API_KEY = 'AIzaSyBgUrQK3HbkrRp7iwNcHoask-e5hlS1w1E';
 let images = [
   { src: 'images/01.jpg', title: 'Photo 01', sub: 'Demo collection' },
   { src: 'images/02.jpg', title: 'Photo 02', sub: 'Demo collection' },
