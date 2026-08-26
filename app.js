@@ -38,11 +38,11 @@ const EFFECTS = [
 const DEFAULT_DRIVE_FOLDER = 'https://drive.google.com/drive/folders/1w4xkZGmNIzNy__Tpj6Wf321jE-RPfQmS?usp=drive_link';
 const DEFAULT_DRIVE_API_KEY = 'AIzaSyBgUrQK3HbkrRp7iwNcHoask-e5hlS1w1E';
 let images = [
-  { src: 'images/01.jpg', title: 'Photo 01', sub: 'Demo collection' },
-  { src: 'images/02.jpg', title: 'Photo 02', sub: 'Demo collection' },
-  { src: 'images/03.jpg', title: 'Photo 03', sub: 'Demo collection' },
-  { src: 'images/04.jpg', title: 'Photo 04', sub: 'Demo collection' },
-  { src: 'images/05.jpg', title: 'Photo 05', sub: 'Demo collection' }
+  { src: 'images/01.jpg', title: 'Photo 01', sub: 'Mai Linh' },
+  { src: 'images/02.jpg', title: 'Photo 02', sub: 'Mai Linh' },
+  { src: 'images/03.jpg', title: 'Photo 03', sub: 'Mai Linh' },
+  { src: 'images/04.jpg', title: 'Photo 04', sub: 'Mai Linh' },
+  { src: 'images/05.jpg', title: 'Photo 05', sub: 'Mai Linh' }
 ];
 
 const DRIVE_STORAGE_KEY = 'galleryDriveConfig';
