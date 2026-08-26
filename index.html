@@ -13,7 +13,7 @@
     <div id="ambient" class="ambient" aria-hidden="true"></div>
     <div id="progress" class="progress"><span></span></div>
 
-    <section class="stage" aria-label="Trình chiếu ảnh">
+    <section class="stage" aria-label="Slide Show">
       <div id="slideA" class="slide slide-a"></div>
       <div id="slideB" class="slide slide-b"></div>
       <div class="vignette" aria-hidden="true"></div>
@@ -28,7 +28,7 @@
       </div>
 
       <div class="center-ui">
-        <button id="playPause" class="icon-btn" aria-label="Phát hoặc dừng">
+        <button id="playPause" class="icon-btn" aria-label="Play or pause">
           <span class="play-icon">▶</span>
         </button>
         <div class="hint">ML</div>
@@ -42,8 +42,8 @@
         <div class="controls">
           <button class="control-btn" id="prevBtn" aria-label="Ảnh trước">←</button>
           <button class="control-btn" id="nextBtn" aria-label="Ảnh tiếp theo">→</button>
-          <button class="control-btn" id="shuffleBtn" aria-label="Đổi ảnh ngẫu nhiên">⤨</button>
-          <button class="control-btn" id="fullscreenBtn" aria-label="Toàn màn hình">⛶</button>
+          <button class="control-btn" id="shuffleBtn" aria-label="Random">⤨</button>
+          <button class="control-btn" id="fullscreenBtn" aria-label="full screen">⛶</button>
         </div>
       </div>
     </section>
@@ -58,14 +58,14 @@
       </div>
 
       <div class="setting">
-        <label for="interval">Thời gian mỗi ảnh <strong><span id="intervalValue">5</span>s</strong></label>
+        <label for="interval">Time <strong><span id="intervalValue">5</span>s</strong></label>
         <input id="interval" type="range" min="2" max="15" step="1" value="5" />
       </div>
 
       <div class="setting toggle-row">
         <div>
           <div class="label">Random ảnh</div>
-          <div class="sub">Không lặp lại ảnh vừa xem</div>
+          <div class="sub">No repeat</div>
         </div>
         <button class="switch on" id="randomToggle" aria-pressed="true"><span></span></button>
       </div>
@@ -73,21 +73,22 @@
       <div class="setting toggle-row">
         <div>
           <div class="label">Random hiệu ứng</div>
-          <div class="sub">Chọn ngẫu nhiên từ nhiều transition</div>
+          <div class="sub">Chọn random</div>
         </div>
         <button class="switch on" id="effectToggle" aria-pressed="true"><span></span></button>
       </div>
 
       <div class="setting">
-        <div class="label effects-title">Hiệu ứng</div>
+        <div class="label effects-title">Effect</div>
         <div class="effect-pills" id="effectPills"></div>
       </div>
 
       <div class="setting drive-setting">
         <div class="label">Google Drive</div>
-        <div class="sub drive-help">Đặt thư mục ở chế độ <b>Anyone with the link → Viewer</b>.</div>
-        <input id="driveFolder" class="text-input" type="text" placeholder="Dán link hoặc Folder ID Google Drive" />
-        <input id="driveApiKey" class="text-input" type="password" placeholder="Google Drive API Key" />
+        //<div class="sub drive-help">Đặt thư mục ở chế độ <b>Anyone with the link → Viewer</b>.</div>
+        <div class="sub drive-help"></div>
+       //<input id="driveFolder" class="text-input" type="text" placeholder="link" />
+        <input id="driveApiKey" class="text-input" type="password" placeholder="API" />
         <button id="loadDriveBtn" class="upload-btn drive-btn">↻ Tải ảnh từ Google Drive</button>
         <div id="driveStatus" class="drive-status">Chưa kết nối Google Drive</div>
       </div>
@@ -106,7 +107,7 @@
       <div class="panel-foot">GitHub Pages compatible · Google Drive API + HTML / CSS / JS</div>
     </aside>
 
-    <button id="openPanel" class="settings-fab" aria-label="Mở cài đặt">⚙</button>
+    <button id="openPanel" class="settings-fab" aria-label="Settings">⚙</button>
   </main>
   <script src="app.js"></script>
 </body>
