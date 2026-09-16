@@ -144,5 +144,114 @@
   <audio id="bgMusic" src="https://drive.google.com/uc?export=download&id=1JzOceWLBk3VjZ4JUmJKn47hEW4axwfVY" loop preload="auto" playsinline></audio>
 
   <script src="app.js"></script>
+<audio
+    id="bgMusic"
+    src="https://drive.google.com/uc?export=download&id=1JzOceWLBk3VjZ4JUmJKn47hEW4axwfVY"
+    loop
+    preload="auto"
+    playsinline>
+  </audio>
+
+  <script src="app.js"></script>
+
+  <script>
+    // ================================
+    // BACKGROUND MUSIC
+    // ================================
+    const bgMusic = document.getElementById("bgMusic");
+    const playPauseBtn = document.getElementById("playPause");
+
+    let musicStarted = false;
+
+    // Volume: 0.0 - 1.0
+    bgMusic.volume = 0.35;
+
+
+    // Try autoplay when page opens
+    window.addEventListener("load", () => {
+      bgMusic.play()
+        .then(() => {
+          musicStarted = true;
+          updateMusicButton();
+        })
+        .catch(() => {
+          // Browser blocked autoplay.
+          // Music will start after the first user interaction.
+          updateMusicButton();
+        });
+    });
+
+
+    // Start music after user's first tap/click
+    function startMusic() {
+      if (musicStarted) return;
+
+      bgMusic.play()
+        .then(() => {
+          musicStarted = true;
+          updateMusicButton();
+
+          document.removeEventListener("click", startMusic);
+          document.removeEventListener("touchstart", startMusic);
+        })
+        .catch(error => {
+          console.log("Music could not start:", error);
+        });
+    }
+
+
+    // Listen for first interaction
+    document.addEventListener("click", startMusic);
+    document.addEventListener("touchstart", startMusic);
+
+
+    // Play / Pause button
+    if (playPauseBtn) {
+      playPauseBtn.addEventListener("click", function(event) {
+
+        // Don't let the general click handler interfere
+        event.stopPropagation();
+
+        if (bgMusic.paused) {
+          bgMusic.play()
+            .then(() => {
+              musicStarted = true;
+              updateMusicButton();
+            })
+            .catch(error => {
+              console.log("Music could not play:", error);
+            });
+
+        } else {
+          bgMusic.pause();
+          updateMusicButton();
+        }
+      });
+    }
+
+
+    // Update the play button icon
+    function updateMusicButton() {
+      if (!playPauseBtn) return;
+
+      const icon = playPauseBtn.querySelector(".play-icon");
+
+      if (icon) {
+        if (bgMusic.paused) {
+          icon.textContent = "▶";
+        } else {
+          icon.textContent = "❚❚";
+        }
+      }
+    }
+
+
+    // Keep button synchronized if music changes
+    bgMusic.addEventListener("play", updateMusicButton);
+    bgMusic.addEventListener("pause", updateMusicButton);
+  </script>
+
+</body>
+</html>
 </body>
 </html>
